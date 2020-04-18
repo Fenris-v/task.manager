@@ -158,5 +158,7 @@
     // Выведите название помещения, в котором живет мышь
     var_dump($farm['animals']['mouse']['house']);
     var_dump($farm['buildings'][$farm['animals']['mouse']['house']]['name']);
+
+    $mageRunCode = isset($_SERVER['MAGE_RUN_CODE']) ? $_SERVER['MAGE_RUN_CODE'] : '';
 ?>
 </pre>
