@@ -1,14 +1,5 @@
 <?php
-    $title = 'Project - ведение списков';
-    $menuNav = ['Главная', 'О нас', 'Контакты', 'Новости', 'Каталог'];
-    $h1 = 'Возможности проекта —';
-    $content = 'Вести свои личные списки, например покупки в магазине, цели, задачи и многое другое. Делится списками с
-                друзьями и просматривать списки друзей.';
-    $menuFooter = ['Авторизация', 'Регистрация', 'Забыли пароль?'];
-    $loginLabel = 'Ваш e-mail:';
-    $passwordLabel = 'Ваш пароль:';
-    $date = 2018;
-    $imageSrc = 'i/logo.png';
+    require __DIR__ . '/homework-3/data.php'
 ?>
 
 <!DOCTYPE html>
@@ -51,12 +42,12 @@
             <div class="project-folders-menu">
                 <ul class="project-folders-v">
                     <?php
-                        global $menuFooter;
-                        for ($i = 0; $i < count($menuFooter); $i++) {
+                        global $menuAuth;
+                        for ($i = 0; $i < count($menuAuth); $i++) {
                             if ($i === 0) {
-                                echo "<li  class='project-folders-v-active'><a href='#'>$menuFooter[$i]</a></li>";
+                                echo "<li  class='project-folders-v-active'><a href='#'>$menuAuth[$i]</a></li>";
                             } else {
-                                echo "<li><a href='#'>$menuFooter[$i]</a></li>";
+                                echo "<li><a href='#'>$menuAuth[$i]</a></li>";
                             }
                         }
                     ?>
