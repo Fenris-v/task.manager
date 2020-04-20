@@ -1,13 +1,8 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/homework-3/include/data.php' ?>
-
 <div class="clearfix">
     <ul class="main-menu bottom">
-        <?php
-        global $menuNav;
-        for ($i = 0; $i < count($menuNav); $i++) {
-            echo "<li><a href='#'>$menuNav[$i]</a></li>";
-        }
-        ?>
+        <?php for ($i = 0; $i < count($menuNav); $i++) : ?>
+            <li><a href='#'><?= $menuNav[$i] ?></a></li>
+        <?php endfor; ?>
     </ul>
 </div>
 

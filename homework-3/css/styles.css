@@ -48,6 +48,8 @@ a:hover {
 
 .logo img {
     border: none;
+    width: 68px;
+    height: 23px;
 }
 
 .main-menu {
@@ -94,6 +96,12 @@ a:hover {
     clear: both;
 }
 
+.table {
+    width: 100%;
+    border: 0;
+    cellspacing: 0;
+    cellpadding: 0;
+}
 
 .left-collum-index {
     background: #ffffff;
@@ -136,7 +144,7 @@ a:hover {
     margin: 0 0 10px 0;
     padding: 0 10px 0 0;
 }
-    
+
 .project-folders-v {
     margin: 0;
     padding: 0;
@@ -180,6 +188,11 @@ a:hover {
     padding: 10px;
 }
 
+.index-auth table {
+    width: 100%;
+    border: 0;
+}
+
 .iat {
     color: #777777;
     margin: 0;
@@ -192,4 +205,16 @@ a:hover {
 
 .iat label {
 	display: block;
+}
+
+.msg {
+    font-weight: bold;
+}
+
+.msg_success {
+    color: green;
+}
+
+.msg_error {
+    color: red;
 }
