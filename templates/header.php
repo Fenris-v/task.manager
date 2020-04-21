@@ -1,7 +1,11 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/include/data.php' ?>
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/data.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/main_menu.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/renderElements.php';
+?>
 
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="/css/styles.css" rel="stylesheet">
@@ -17,8 +21,6 @@
 
 <div class="clear">
     <ul class="main-menu">
-        <?php for ($i = 0; $i < count($menuNav); $i++) : ?>
-            <li><a href='#'><?= $menuNav[$i] ?></a></li>
-        <?php endfor; ?>
+        <?php render\renderMenu($menuNav, 'nav nav_header', 'asc'); ?>
     </ul>
 </div>

@@ -1,8 +1,6 @@
 <div class="clearfix">
     <ul class="main-menu bottom">
-        <?php for ($i = 0; $i < count($menuNav); $i++) : ?>
-            <li><a href='#'><?= $menuNav[$i] ?></a></li>
-        <?php endfor; ?>
+        <?php render\renderMenu($menuNav, 'nav nav_footer', 'desc'); ?>
     </ul>
 </div>
 

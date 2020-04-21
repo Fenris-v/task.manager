@@ -1,5 +1,4 @@
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php'; ?>
-
     <table class="table" cellspacing="0" cellpadding="0">
         <tr>
             <td class="left-collum-index">
@@ -55,4 +54,3 @@
     </table>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/footer.php';
-
