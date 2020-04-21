@@ -1,4 +1,4 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/homework-3/templates/header.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php'; ?>
 
     <table class="table" cellspacing="0" cellpadding="0">
         <tr>
@@ -10,25 +10,23 @@
 
                 <div class="project-folders-menu">
                     <ul class="project-folders-v">
-                        <?php for ($i = 0; $i < count($menuAuth); $i++) {
-                            if ($i === 0) { ?>
-                                <li class='project-folders-v-active'><a href='#'><?= $menuAuth[$i] ?></a></li>
-                            <?php } else { ?>
-                                <li><a href='#'><?= $menuAuth[$i] ?></a></li>
-                            <?php }
-                        }
-                        ?>
+                        <?php for ($i = 0; $i < count($menuAuth); $i++) : ?>
+                            <li class='<?= $i !== 0 ? '' : 'project-folders-v-active'; ?>'>
+                                <a href='#'><?= $menuAuth[$i] ?></a>
+                            </li>
+                        <?php endfor; ?>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
 
                 <div class="index-auth">
                     <?php if ($isAuth) {
-                        require $_SERVER['DOCUMENT_ROOT'] . '/homework-3/templates/success.php';
-                    } elseif (isset($_GET['login']) && $_GET['login'] == 'yes') { ?>
-                        <?php !isset($_POST['login']) ?: require_once $_SERVER['DOCUMENT_ROOT'] . '/homework-3/templates/error.php'; ?>
-                        <!--У меня не в корне лежит данный файл, поэтому путь такой-->
-                        <form action="/homework-3/index.php?login=yes" method="post">
+                        require $_SERVER['DOCUMENT_ROOT'] . '/templates/success.php';
+                    } elseif (isset($_GET['login']) && $_GET['login'] == 'yes') {
+                        if (isset($_POST['login'])) {
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/error.php';
+                        } ?>
+                        <form action="/index.php?login=yes" method="post">
                             <table cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td class="iat">
@@ -41,7 +39,7 @@
                                     <td class="iat">
                                         <label for="password_id"><?= $passwordLabel ?></label>
                                         <input id="password_id" size="30" name="password" type="password"
-                                               value="<?= isset($_POST['password']) ? $_POST['password'] : '' ?>">
+                                               value="<?= $_POST['password'] ?? '' ?>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -56,4 +54,4 @@
         </tr>
     </table>
 
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/homework-3/templates/footer.php';
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/footer.php';

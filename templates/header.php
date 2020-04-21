@@ -1,10 +1,10 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/homework-3/include/data.php' ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/include/data.php' ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="/homework-3/css/styles.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
     <title><?= $title ?></title>
 </head>
 

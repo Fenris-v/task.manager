@@ -8,7 +8,7 @@ $menuAuth = ['Авторизация', 'Регистрация', 'Забыли �
 $loginLabel = 'Ваш e-mail:';
 $passwordLabel = 'Ваш пароль:';
 $date = 2018;
-$imageSrc = '/homework-3/i/logo.png';
+$imageSrc = '/i/logo.png';
 
 $login = 'admin';
 $password = '123qwe';
@@ -16,20 +16,10 @@ $password = '123qwe';
 $isAuth = false;
 
 if (isset($_POST['send'])) {
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/homework-3/include/logins.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/homework-3/include/passwords.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/include/logins.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/include/passwords.php';
 
     $index = array_search($_POST['login'], $logins);
 
-    ($index !== false && $_POST['password'] == $passwords[$index]) ? $isAuth = true : $isAuth = false;
+    $isAuth = $index !== false && $_POST['password'] == $passwords[$index];
 }
-
-//if (isset($_POST['send']) && $_POST['login'] == $login && $_POST['password'] == $password) {
-//if (isset($_POST['send'])) {
-//    foreach ($logins as $key => $login) {
-//        if ($login == $_POST['login'] && $passwords[$key] == $_POST['password']) {
-//            $isAuth = true;
-//            break;
-//        }
-//    }
-//}
