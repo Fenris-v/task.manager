@@ -45,8 +45,13 @@ function renderMenu($menu, $class = '', $typeSort = '')
  */
 function renderH1($menu)
 {
+    if (stripos($_SERVER['REQUEST_URI'], '?') !== false) {
+        $uri = stristr($_SERVER['REQUEST_URI'], '?', true);
+    } else {
+        $uri = $_SERVER['REQUEST_URI'];
+    }
     foreach ($menu as $item) {
-        if ($_SERVER['REQUEST_URI'] == $item['path']) { ?>
+        if ($uri == $item['path']) { ?>
             <h1>
                 <?php if (mb_strlen($item['title']) > 15) {
                     echo mb_substr($item['title'], 0, 15) . '...';

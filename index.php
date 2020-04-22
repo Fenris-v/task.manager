@@ -1,4 +1,4 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php'; ?>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php'; ?>
 
     <table class="table" cellspacing="0" cellpadding="0">
         <tr>
@@ -12,7 +12,7 @@
                     <ul class="project-folders-v">
                         <?php for ($i = 0; $i < count($menuAuth); $i++) : ?>
                             <li class='<?= $i !== 0 ? '' : 'project-folders-v-active'; ?>'>
-                                <a href='#'><?= $menuAuth[$i] ?></a>
+                                <a href='<?= $i === 0 ? '?login=yes' : '/' ?>'><?= $menuAuth[$i] ?></a>
                             </li>
                         <?php endfor; ?>
                     </ul>
@@ -24,7 +24,7 @@
                         require $_SERVER['DOCUMENT_ROOT'] . '/templates/success.php';
                     } elseif (isset($_GET['login']) && $_GET['login'] == 'yes') {
                         if (isset($_POST['login'])) {
-                            require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/error.php';
+                            require $_SERVER['DOCUMENT_ROOT'] . '/templates/error.php';
                         } ?>
                         <form action="/index.php?login=yes" method="post">
                             <table cellspacing="0" cellpadding="0">
@@ -54,5 +54,5 @@
         </tr>
     </table>
 
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/footer.php';
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/templates/footer.php';
 

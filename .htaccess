@@ -1,9 +1,6 @@
-AddDefaultCharset UTF-8
+# AddDefaultCharset UTF-8
 
-Options +FollowSymLinks
-RewriteEngine On
+# Options +FollowSymLinks
+# RewriteEngine On
 
-Redirect 301 /route/about/ /route
-Redirect 301 /route/contacts/ /route
-Redirect 301 /route/catalog/ /route
-Redirect 301 /route/news/ /route
+# DirectoryIndex /route/*/ /route/index.php
