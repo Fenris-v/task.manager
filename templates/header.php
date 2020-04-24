@@ -20,7 +20,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/include/renderElements.php';
 </div>
 
 <div class="clear">
-    <ul class="main-menu">
-        <?php render\renderMenu($menuNav, 'nav nav_header', 'asc'); ?>
-    </ul>
+    <?php
+    render\sortArray($menuNav, 'sort', SORT_ASC);
+    include $_SERVER['DOCUMENT_ROOT'] . '/templates/menu.php';
+    ?>
 </div>

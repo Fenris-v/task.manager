@@ -26,7 +26,7 @@
                         if (isset($_POST['login'])) {
                             require $_SERVER['DOCUMENT_ROOT'] . '/templates/error.php';
                         } ?>
-                        <form action="/index.php?login=yes" method="post">
+                        <form action="/?login=yes" method="post">
                             <table cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td class="iat">

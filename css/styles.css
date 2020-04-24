@@ -66,24 +66,23 @@ a:hover {
     padding: 0;
 }
 
-.nav_header a {
+.main-menu a {
     font-size: 16px;
 }
 
-.nav_header.active a,
-.nav_footer.active a {
+.main-menu .active a {
     text-decoration: underline;
 }
 
-.nav_footer a {
+.menu_bottom .main-menu a {
     font-size: 12px;
 }
 
-.main-menu.bottom {
+.menu_bottom .main-menu {
     float: left;
 }
 
-.main-menu.bottom li {
+.menu_bottom .main-menu li {
     float: none;
     display: block;
 }
