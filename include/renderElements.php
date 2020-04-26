@@ -22,8 +22,7 @@ function renderH1($menu): string
 {
     foreach ($menu as $item) {
         if (isCurrentUrl($item['path'])) {
-            return $item['title'] ?: 'Default title';
-            break;
+            return $item['title'];
         }
     }
     return 'Default title';
