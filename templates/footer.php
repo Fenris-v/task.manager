@@ -1,6 +1,6 @@
 <div class="clearfix menu_bottom">
     <?php
-    menu($menuNav, 'sort', SORT_DESC);
+    menu\showMenu($menuNav, 'sort', SORT_DESC, 'main-menu bottom');
     ?>
 </div>
 
