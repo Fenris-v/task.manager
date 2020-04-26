@@ -1,7 +1,6 @@
 <div class="clearfix menu_bottom">
     <?php
-    render\sortArray($menuNav, 'sort', SORT_DESC);
-    include $_SERVER['DOCUMENT_ROOT'] . '/templates/menu.php';
+    menu($menuNav, 'sort', SORT_DESC);
     ?>
 </div>
 

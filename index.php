@@ -3,7 +3,7 @@
     <table class="table" cellspacing="0" cellpadding="0">
         <tr>
             <td class="left-collum-index">
-                <?php render\renderH1($menuNav) ?>
+                <h1><?= render\renderH1($menuNav) ?></h1>
                 <p><?= $content ?></p>
             </td>
             <td class="right-collum-index">

@@ -21,7 +21,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/include/renderElements.php';
 
 <div class="clear">
     <?php
-    render\sortArray($menuNav, 'sort', SORT_ASC);
+    // Не понимаю зачем здесь инклуд, если можно просто вызвать функцию при помощи неймспейса
+    // Если же не создавать функцию в файле menu.php, то как передавать аргументы? Сортировка разная в хэдере и футере,
+    // потому как минимум один аргумент должен отличаться
+    // Опять же, если в файле теперь функция, то не понимаю зачем нужно было выносить её из файла renderElements.php?
     include $_SERVER['DOCUMENT_ROOT'] . '/templates/menu.php';
+    menu($menuNav, 'sort', SORT_ASC);
     ?>
 </div>
