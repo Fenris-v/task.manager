@@ -37,3 +37,8 @@ function isCurrentUrl($url): bool
 {
     return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) == $url;
 }
+
+function isAuth(): bool
+{
+    return isset($_SESSION['isAuth']) && $_SESSION['isAuth'];
+}

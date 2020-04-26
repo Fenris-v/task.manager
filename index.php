@@ -1,4 +1,7 @@
-<?php require $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php'; ?>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
+if (isset($_GET['logout'])) {
+    session_destroy();
+} ?>
 
     <table class="table" cellspacing="0" cellpadding="0">
         <tr>
@@ -12,7 +15,17 @@
                     <ul class="project-folders-v">
                         <?php for ($i = 0; $i < count($menuAuth); $i++) : ?>
                             <li class='<?= $i !== 0 ? '' : 'project-folders-v-active'; ?>'>
-                                <a href='<?= $i === 0 ? '?login=yes' : '/' ?>'><?= $menuAuth[$i] ?></a>
+                                <a href='<?php if ($i === 0 && render\isAuth()) {
+                                    echo '/?logout';
+                                } elseif ($i === 0) {
+                                    echo '?login=yes';
+                                } else {
+                                    echo '/';
+                                } ?>'><?php if ($i === 0 && render\isAuth()) {
+                                        echo 'Выйти';
+                                    } else {
+                                        echo $menuAuth[$i];
+                                    } ?></a>
                             </li>
                         <?php endfor; ?>
                     </ul>

@@ -21,4 +21,6 @@ if (isset($_POST['send'])) {
     $index = array_search($_POST['login'], $logins);
 
     $isAuth = $index !== false && $_POST['password'] == $passwords[$index];
+
+    !$isAuth ?: $_SESSION['login'] = $_POST['login'];
 }
