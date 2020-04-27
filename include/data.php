@@ -20,10 +20,15 @@ if (isset($_POST['send'])) {
 
     if (!isset($_COOKIE['login'])) {
         $index = array_search($_POST['login'], $logins);
+        setcookie('login', $_POST['login'], time() + 30 * 24 * 60 * 60);
     } else {
         $index = array_search($_COOKIE['login'], $logins);
     }
     $isAuth = $index !== false && $_POST['password'] == $passwords[$index];
 
-    !$isAuth ?: setcookie('login', $_POST['login'], time() + 30 * 24 * 60 * 60);
+    if (isset($_POST['login'])) {
+        !$isAuth ?: setcookie('login', $_POST['login'], time() + 30 * 24 * 60 * 60);
+    } else {
+        !$isAuth ?: setcookie('login', $_COOKIE['login'], time() + 30 * 24 * 60 * 60);
+    }
 }
