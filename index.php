@@ -41,13 +41,15 @@ if (isset($_GET['logout'])) {
                         } ?>
                         <form action="/?login=yes" method="post">
                             <table cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td class="iat">
-                                        <label for="login_id"><?= $loginLabel ?></label>
-                                        <input id="login_id" size="30" name="login"
-                                               value="<?= $_POST['login'] ?? '' ?>">
-                                    </td>
-                                </tr>
+                                <?php if (!isset($_COOKIE['login'])) : ?>
+                                    <tr>
+                                        <td class="iat">
+                                            <label for="login_id"><?= $loginLabel ?></label>
+                                            <input id="login_id" size="30" name="login"
+                                                   value="<?= $_POST['login'] ?? '' ?>">
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
                                 <tr>
                                     <td class="iat">
                                         <label for="password_id"><?= $passwordLabel ?></label>
@@ -68,4 +70,3 @@ if (isset($_GET['logout'])) {
     </table>
 
 <?php require $_SERVER['DOCUMENT_ROOT'] . '/templates/footer.php';
-

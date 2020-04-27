@@ -2,5 +2,4 @@ AddDefaultCharset UTF-8
 
 RewriteEngine On
 
-php_value session.gc_maxlifetime 120
-# php_value session.cookie_lifetime 120
+php_value session.cookie_lifetime 120

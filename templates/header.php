@@ -1,6 +1,5 @@
 <?php
 session_name('session_id');
-session_set_cookie_params(30 * 24 * 60 * 60);
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/data.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/main_menu.php';
