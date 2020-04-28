@@ -36,7 +36,7 @@ if (isset($_GET['logout'])) {
                     <?php if ($isAuth) {
                         require $_SERVER['DOCUMENT_ROOT'] . '/templates/success.php';
                     } elseif (isset($_GET['login']) && $_GET['login'] == 'yes') {
-                        if (isset($_POST['login'])) {
+                        if (isset($_POST['password'])) {
                             require $_SERVER['DOCUMENT_ROOT'] . '/templates/error.php';
                         } ?>
                         <form action="/?login=yes" method="post">
@@ -46,7 +46,7 @@ if (isset($_GET['logout'])) {
                                         <td class="iat">
                                             <label for="login_id"><?= $loginLabel ?></label>
                                             <input id="login_id" size="30" name="login"
-                                                   value="<?= $_POST['login'] ?? '' ?>">
+                                                   value="<?= htmlspecialchars($_POST['login']) ?? '' ?>">
                                         </td>
                                     </tr>
                                 <?php endif; ?>
@@ -54,7 +54,7 @@ if (isset($_GET['logout'])) {
                                     <td class="iat">
                                         <label for="password_id"><?= $passwordLabel ?></label>
                                         <input id="password_id" size="30" name="password" type="password"
-                                               value="<?= $_POST['password'] ?? '' ?>">
+                                               value="<?= htmlspecialchars($_POST['password']) ?? '' ?>">
                                     </td>
                                 </tr>
                                 <tr>

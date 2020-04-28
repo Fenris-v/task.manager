@@ -18,11 +18,11 @@ if (isset($_POST['send'])) {
     require_once $_SERVER['DOCUMENT_ROOT'] . '/include/logins.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/include/passwords.php';
 
-    $login = !isset($_COOKIE['login']) ? $_POST['login'] : $_COOKIE['login'];
+    $login = !isset($_COOKIE['login']) ? htmlspecialchars($_POST['login']) : $_COOKIE['login'];
 
     $index = array_search($login, $logins);
 
     $isAuth = $index !== false && $_POST['password'] == $passwords[$index];
 
-    !$isAuth ?: setcookie('login', $login, time() + 30 * 24 * 60 * 60);
+    !$isAuth ?: setcookie('login', $login, time() + 30 * 24 * 60 * 60, '/', 'task.manager');
 }
