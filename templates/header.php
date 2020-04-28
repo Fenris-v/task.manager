@@ -1,6 +1,7 @@
 <?php
 session_name('session_id');
 session_start();
+//phpinfo();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/data.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/main_menu.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/menu.php';

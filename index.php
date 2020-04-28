@@ -54,7 +54,9 @@ if (isset($_GET['logout'])) {
                                     <td class="iat">
                                         <label for="password_id"><?= $passwordLabel ?></label>
                                         <input id="password_id" size="30" name="password" type="password"
-                                               value="<?= htmlspecialchars($_POST['password']) ?? '' ?>">
+                                               value="<?=
+                                               isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
+                                               ?>">
                                     </td>
                                 </tr>
                                 <tr>
