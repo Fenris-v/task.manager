@@ -1,7 +1,4 @@
-<?php require $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
-if (isset($_GET['logout'])) {
-    session_destroy();
-} ?>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php'; ?>
 
     <table class="table" cellspacing="0" cellpadding="0">
         <tr>
@@ -20,7 +17,7 @@ if (isset($_GET['logout'])) {
                                 } elseif ($i === 0) {
                                     echo '?login=yes';
                                 } else {
-                                    echo '/';
+                                    echo '?';
                                 } ?>'><?php if ($i === 0 && render\isAuth()) {
                                         echo 'Выйти';
                                     } else {
@@ -46,7 +43,9 @@ if (isset($_GET['logout'])) {
                                         <td class="iat">
                                             <label for="login_id"><?= $loginLabel ?></label>
                                             <input id="login_id" size="30" name="login"
-                                                   value="<?= htmlspecialchars($_POST['login']) ?? '' ?>">
+                                                   value="<?=
+                                                   isset($_POST['login']) && htmlspecialchars($_POST['login']) ?? '';
+                                                   ?>">
                                         </td>
                                     </tr>
                                 <?php endif; ?>
