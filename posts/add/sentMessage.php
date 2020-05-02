@@ -1,7 +1,5 @@
 <?php
 
-var_dump($_POST);
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db/connect.php';
 
 $title = mysqli_real_escape_string(database\connect(), $_POST['title']);
@@ -29,9 +27,6 @@ $result = mysqli_query(
     database\connect(),
     "SELECT id FROM users WHERE name='$recipient' || name='$sender'"
 );
-
-var_dump($sender_id);
-var_dump($sender_id);
 
 mysqli_query(
     database\connect(),
