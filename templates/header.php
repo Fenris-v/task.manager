@@ -1,22 +1,30 @@
 <?php
+
 session_name('session_id');
 session_start();
+
+$login = !isset($_COOKIE['login']) ? htmlspecialchars($_POST['login']) : $_COOKIE['login'];
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/connection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/data.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/main_menu.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/menu.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/renderElements.php';
+
 if (isset($_GET['logout'])) {
     session_destroy();
-    header('location: http://task.manager/?login=yes');
+    header('location: /?login=yes');
     exit;
 } elseif (
     !isset($_SESSION['isAuth']) && $_SERVER['REQUEST_URI'] != '/?login=yes' ||
     isset($_SESSION['isAuth']) && $_SESSION['isAuth'] !== true && $_SERVER['REQUEST_URI'] !== '/?login=yes'
 ) {
-    header('location: http://task.manager/?login=yes');
+    header('location: /?login=yes');
     exit;
+} elseif(render\isAuth()) {
+    setcookie('login', $login, time() + 30 * 24 * 60 * 60, '/');
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/include/data.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/include/main_menu.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/include/menu.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/include/renderElements.php';
 !$isAuth ?: $_SESSION['isAuth'] = true;
 ?>
 

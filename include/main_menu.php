@@ -25,5 +25,15 @@ $menuNav = [
         'title' => 'Каталог',
         'path' => '/route/catalog/',
         'sort' => 5
+    ],
+    [
+        'title' => 'Сообщения',
+        'path' => '/posts/',
+        'sort' => 7
+    ],
+    [
+        'title' => 'Профиль',
+        'path' => '/user/',
+        'sort' => 6
     ]
 ];

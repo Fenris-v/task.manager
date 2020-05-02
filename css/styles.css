@@ -52,6 +52,10 @@ a:hover {
     height: 23px;
 }
 
+.clear .main-menu {
+    display: flex;
+}
+
 .main-menu {
     margin: 0;
     padding: 0;
@@ -227,4 +231,60 @@ a:hover {
 
 .msg_error {
     color: red;
+}
+
+.container {
+    background: #ffffff;
+}
+
+.container p {
+    margin: 0;
+    padding: 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.msg_container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.msg_half {
+    width: 50%;
+}
+
+.msg_half ul {
+    margin: 0;
+    padding: 20px;
+    list-style: none;
+}
+
+.msg_half li {
+    border: 1px solid #cccccc;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.msg_add {
+    white-space: nowrap;
+    margin: 20px;
+    background: #cccccc;
+    display: inline-block;
+    padding: 10px;
+}
+
+.msg_form {
+    list-style: none;
+    padding: 0;
+}
+
+.container form {
+    padding: 20px;
+}
+
+.msg_form input[type='text'], .msg_form select, .msg_form textarea {
+    width: 100%;
+    margin-bottom: 20px;
 }
