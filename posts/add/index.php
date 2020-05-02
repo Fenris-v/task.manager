@@ -1,8 +1,10 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
+
+$user = mysqli_real_escape_string(database\connect(), $_COOKIE['login']);
 $result = mysqli_query(
     database\connect(),
-    "SELECT name FROM users"
+    "SELECT name FROM users WHERE login!='$user' && activity=true"
 );
 
 $users = [];

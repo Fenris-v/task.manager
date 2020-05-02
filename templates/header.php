@@ -3,7 +3,9 @@
 session_name('session_id');
 session_start();
 
-$login = !isset($_COOKIE['login']) ? htmlspecialchars($_POST['login']) : $_COOKIE['login'];
+if (isset($_COOKIE['login']) || isset($_POST['login'])) {
+    $login = !isset($_COOKIE['login']) ? htmlspecialchars($_POST['login']) : $_COOKIE['login'];
+}
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db/connect.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/data.php';
