@@ -5,7 +5,7 @@ session_start();
 
 $login = !isset($_COOKIE['login']) ? htmlspecialchars($_POST['login']) : $_COOKIE['login'];
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/db/connection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/connect.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/data.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/main_menu.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/menu.php';
@@ -24,8 +24,6 @@ if (isset($_GET['logout'])) {
 } elseif(render\isAuth()) {
     setcookie('login', $login, time() + 30 * 24 * 60 * 60, '/');
 }
-
-!$isAuth ?: $_SESSION['isAuth'] = true;
 ?>
 
 <!DOCTYPE html>

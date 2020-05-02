@@ -149,6 +149,7 @@ a:hover {
 .footer a {
     color: #ffffff;
 }
+
 .footer a:hover {
     color: #cccccc;
 }
@@ -218,7 +219,7 @@ a:hover {
 }
 
 .iat label {
-	display: block;
+    display: block;
 }
 
 .msg {
@@ -237,6 +238,14 @@ a:hover {
     background: #ffffff;
 }
 
+.container_view {
+    padding: 20px;
+}
+
+.container_flex {
+    display: flex;
+}
+
 .container p {
     margin: 0;
     padding: 20px;
@@ -253,6 +262,10 @@ a:hover {
 
 .msg_half {
     width: 50%;
+}
+
+.msg_half h2 {
+    padding-left: 20px;
 }
 
 .msg_half ul {
