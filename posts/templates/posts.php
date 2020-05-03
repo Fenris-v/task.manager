@@ -1,27 +1,12 @@
 <?php
-$login = mysqli_real_escape_string(database\connect(), $login);
-$result = mysqli_query(
-    database\connect(),
-    "SELECT activity, title, `read`, messages.id AS id FROM users
-LEFT JOIN messages ON recipient_id=users.id
-WHERE login='$login'"
-);
-
-$messages = [];
-
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $messages[] = $row;
-    }
-}
-
+$messages = database\getMessagesLists($login);
 database\closeConnect(database\connect());
 ?>
     <div class="container">
-        <?php if (!isset($messages[0]['activity']) || !$messages[0]['activity']): ?>
-            <p>Вы сможете отправлять сообщения после прохождения модерации</p>
-        <?php else: ?>
-
+<!--        Здесь не вызывал общую функцию проверки активности, чтобы избежать лишнего обращения к БД-->
+        <?php if (!isset($messages[0]['activity']) || !$messages[0]['activity']):
+            include $_SERVER['DOCUMENT_ROOT'] . '/posts/templates/notActive.html';
+        else: ?>
             <a class="msg_add" href="/posts/add/">Написать сообщение</a>
 
             <div class="msg_container">

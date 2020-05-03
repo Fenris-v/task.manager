@@ -10,12 +10,6 @@ $sender = mysqli_real_escape_string(database\connect(), $_COOKIE['login']);
 
 $result = mysqli_query(
     database\connect(),
-    "SELECT id FROM users WHERE name='$recipient'"
-);
-$recipient_id = mysqli_fetch_assoc($result)['id'];
-
-$result = mysqli_query(
-    database\connect(),
     "SELECT id FROM users WHERE login='$sender'"
 );
 
@@ -30,8 +24,8 @@ $result = mysqli_query(
 
 mysqli_query(
     database\connect(),
-    "INSERT messages(title, text, sender_id, recipient_id, date)
-VALUES ('$title', '$text', '$sender_id', $recipient_id, '$date')"
+    "INSERT messages(title, text, sender_id, recipient_id, date, section_id)
+VALUES ('$title', '$text', '$sender_id', '$recipient', '$date', '$section')"
 );
 
 database\closeConnect(database\connect());
