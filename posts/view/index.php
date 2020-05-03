@@ -6,11 +6,13 @@ if (!isset($_GET['msg'])) {
 
 require $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
 
-$msgId = mysqli_real_escape_string(database\connect(), $_GET['msg']);
+$isActive = database\canWriteMsg($login);
 
-database\updateMessageStatus($msgId);
-
-$msg = database\getMessage($msgId);
+if (!$isActive) {
+    $msgId = mysqli_real_escape_string(database\connect(), $_GET['msg']);
+    database\updateMessageStatus($msgId);
+    $msg = database\getMessage($msgId);
+}
 
 database\closeConnect(database\connect());
 

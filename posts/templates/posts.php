@@ -1,10 +1,10 @@
 <?php
 $messages = database\getMessagesLists($login);
+$isActive = database\canWriteMsg($login);
 database\closeConnect(database\connect());
 ?>
     <div class="container">
-<!--        Здесь не вызывал общую функцию проверки активности, чтобы избежать лишнего обращения к БД-->
-        <?php if (!isset($messages[0]['activity']) || !$messages[0]['activity']):
+        <?php if (!$isActive):
             include $_SERVER['DOCUMENT_ROOT'] . '/posts/templates/notActive.html';
         else: ?>
             <a class="msg_add" href="/posts/add/">Написать сообщение</a>

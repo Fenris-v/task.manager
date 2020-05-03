@@ -4,7 +4,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
 $login = mysqli_real_escape_string(database\connect(), $_COOKIE['login']);
 $users = database\getRecipients($login);
 $sections = database\getMessagesSections();
-$isActive = database\isActiveUser($login);
+$isActive = database\canWriteMsg($login);
 
 database\closeConnect(database\connect());
 ?>

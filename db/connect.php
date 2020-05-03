@@ -126,9 +126,19 @@ LEFT JOIN colors AS c ON c.name=s.color"
     return [];
 }
 
-function isActiveUser($login): bool
+/**
+ * Can the user write messages
+ * @param $login - login of the user
+ * @return bool - can write
+ */
+function canWriteMsg($login): bool
 {
-    $result = mysqli_query(connect(), "SELECT activity FROM users WHERE login='$login'");
+    $result = mysqli_query(
+        connect(),
+        "SELECT group_id FROM users
+LEFT JOIN user_group ON user_id=id && group_id=2
+WHERE login='$login'"
+    );
     if (mysqli_num_rows($result) > 0) {
         return (bool)mysqli_fetch_assoc($result)['activity'];
     }
