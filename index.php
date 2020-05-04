@@ -44,7 +44,7 @@
                                             <label for="login_id"><?= $loginLabel ?></label>
                                             <input id="login_id" size="30" name="login"
                                                    value="<?=
-                                                   isset($_POST['login']) && htmlspecialchars($_POST['login']) ?? '';
+                                                   isset($_POST['login']) && htmlspecialchars($_POST['login']) ? htmlspecialchars($_POST['login']) : '';
                                                    ?>">
                                         </td>
                                     </tr>

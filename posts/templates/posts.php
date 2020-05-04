@@ -1,11 +1,10 @@
-<?php
-$messages = database\getMessagesLists($login);
-database\closeConnect(database\connect());
-?>
+<?php $messages = database\getMessagesLists($_COOKIE['login']); ?>
     <div class="container">
-        <?php if (!database\canWriteMsg($login)):
-            include $_SERVER['DOCUMENT_ROOT'] . '/posts/templates/notActive.html';
-        else: ?>
+        <?php
+        $canWrite = database\canWriteMsg($_COOKIE['login']);
+        database\closeConnect(database\connect());
+
+        if ($canWrite): ?>
             <a class="msg_add" href="/posts/add/">Написать сообщение</a>
 
             <div class="msg_container">

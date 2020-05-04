@@ -14,6 +14,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/include/menu.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/renderElements.php';
 
 if (isset($_GET['logout'])) {
+    setcookie('login', '', 1);
     session_destroy();
     header('location: /?login=yes');
     exit;

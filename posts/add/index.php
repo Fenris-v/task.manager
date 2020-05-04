@@ -1,13 +1,14 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
 
-$login = mysqli_real_escape_string(database\connect(), $_COOKIE['login']);
-$users = database\getRecipients($login);
+$users = database\getRecipients($_COOKIE['login']);
 $sections = database\getMessagesSections();
-database\closeConnect(database\connect());
 ?>
     <div class="container">
-        <?php if (database\canWriteMsg($login)) : ?>
+        <?php
+        $canWrite = database\canWriteMsg($_COOKIE['login']);
+        database\closeConnect(database\connect());
+        if ($canWrite) : ?>
             <form method="post" action="/posts/add/sentMessage.php">
                 <ul class="msg_form">
                     <li>
@@ -28,7 +29,8 @@ database\closeConnect(database\connect());
                         <label>Раздел сообщения
                             <select name="section" required>
                                 <?php foreach ($sections as $section) : ?>
-                                    <option style="background: <?= $section['color'] ?>" value="<?= $section['id'] ?>"><?= $section['name'] ?></option>
+                                    <option style="background: <?= $section['color'] ?>"
+                                            value="<?= $section['id'] ?>"><?= $section['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </label>
@@ -43,9 +45,7 @@ database\closeConnect(database\connect());
                     </li>
                 </ul>
             </form>
-        <?php else:
-            include $_SERVER['DOCUMENT_ROOT'] . '/posts/templates/notActive.html';
-        endif; ?>
+        <?php endif; ?>
     </div>
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/templates/footer.php';

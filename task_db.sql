@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Май 03 2020 г., 21:34
+-- Время создания: Май 04 2020 г., 22:32
 -- Версия сервера: 10.4.11-MariaDB
 -- Версия PHP: 7.4.4
 
@@ -84,9 +84,9 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`id`, `title`, `date`, `sender_id`, `recipient_id`, `text`, `read`, `section_id`) VALUES
 (1, 'Первое сообщение', '2020-02-02 00:45:13', 3, 1, 'Текст первого сообщения', 0, 1),
-(2, 'Второе сообщение', '2019-08-02 00:45:40', 4, 1, 'Текст второго сообщения', 1, 1),
-(3, 'Третье сообщение', '2020-01-02 00:45:47', 2, 1, 'Текст третьего сообщения', 1, 1),
-(4, 'Четвертое сообщение', '2019-07-02 00:45:55', 5, 1, 'Текст четвертого сообщения', 0, 1),
+(2, 'Второе сообщение', '2019-08-02 00:45:40', 4, 1, 'Текст второго сообщения', 0, 1),
+(3, 'Третье сообщение', '2020-01-02 00:45:47', 2, 1, 'Текст третьего сообщения', 0, 1),
+(4, 'Четвертое сообщение', '2019-07-02 00:45:55', 5, 1, 'Текст четвертого сообщения', 1, 1),
 (31, 'Это тест', '2020-05-03 00:29:01', 1, 4, 'Это основной тест', 0, 1),
 (32, 'Это тест', '2020-05-03 00:30:17', 1, 4, 'Это основной тест', 0, 1),
 (33, 'Письма Иванову', '2020-05-03 00:38:50', 2, 1, 'Это - важная информация для Ивана', 1, 1),
@@ -104,7 +104,7 @@ CREATE TABLE `section` (
   `name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `color` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `creator` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `creator_id` int(11) NOT NULL,
   `path` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -112,15 +112,15 @@ CREATE TABLE `section` (
 -- Дамп данных таблицы `section`
 --
 
-INSERT INTO `section` (`id`, `name`, `color`, `date`, `creator`, `path`) VALUES
-(1, 'Основные', 'Зеленый', NULL, 'user', '1'),
-(2, 'по работе', 'Зеленый', NULL, 'user', '1.1'),
-(3, 'личные', 'Зеленый', NULL, 'user', '1.2'),
-(4, 'Оповещения', 'Аквамарин', NULL, 'user', '2'),
-(5, 'форумы', 'Аквамарин', NULL, 'user', '2.1'),
-(6, 'магазины', 'Аквамарин', NULL, 'user', '2.2'),
-(7, 'подписки', 'Аквамарин', NULL, 'user', '2.3'),
-(8, 'Спам', 'Красный', NULL, 'user', '3');
+INSERT INTO `section` (`id`, `name`, `color`, `date`, `creator_id`, `path`) VALUES
+(1, 'Основные', 'Зеленый', NULL, 1, '1'),
+(2, 'по работе', 'Зеленый', NULL, 1, '1.1'),
+(3, 'личные', 'Зеленый', NULL, 1, '1.2'),
+(4, 'Оповещения', 'Аквамарин', NULL, 1, '2'),
+(5, 'форумы', 'Аквамарин', NULL, 1, '2.1'),
+(6, 'магазины', 'Аквамарин', NULL, 1, '2.2'),
+(7, 'подписки', 'Аквамарин', NULL, 1, '2.3'),
+(8, 'Спам', 'Красный', NULL, 1, '3');
 
 -- --------------------------------------------------------
 
@@ -208,7 +208,8 @@ ALTER TABLE `messages`
 ALTER TABLE `section`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `section_path_uindex` (`path`),
-  ADD KEY `section_colors_name_fk` (`color`);
+  ADD KEY `section_colors_name_fk` (`color`),
+  ADD KEY `section_users_id_fk` (`creator_id`);
 
 --
 -- Индексы таблицы `users`
@@ -268,7 +269,8 @@ ALTER TABLE `messages`
 -- Ограничения внешнего ключа таблицы `section`
 --
 ALTER TABLE `section`
-  ADD CONSTRAINT `section_colors_name_fk` FOREIGN KEY (`color`) REFERENCES `colors` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `section_colors_name_fk` FOREIGN KEY (`color`) REFERENCES `colors` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `section_users_id_fk` FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `user_group`

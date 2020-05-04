@@ -3,6 +3,7 @@
 namespace database;
 
 use mysqli;
+use mysqli_result;
 
 /**
  * Create connection with database
@@ -32,7 +33,7 @@ function connect(): mysqli
  * Close connection with database
  * @param $connect - connection with database
  */
-function closeConnect($connect): void
+function closeConnect(mysqli $connect): void
 {
     mysqli_close($connect);
 }
@@ -42,8 +43,9 @@ function closeConnect($connect): void
  * @param $login - login of the user
  * @return array - list of messages
  */
-function getMessagesLists($login): array
+function getMessagesLists(string $login): array
 {
+    $login = mysqli_real_escape_string(connect(), $login);
     $result = mysqli_query(
         connect(),
         "SELECT activity, title, `read`, messages.id AS id FROM users
@@ -51,11 +53,7 @@ LEFT JOIN messages ON recipient_id=users.id
 WHERE login='$login'"
     );
 
-    if (mysqli_num_rows($result) > 0) {
-        return $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }
-
-    return [];
+    return getResult($result);
 }
 
 /**
@@ -63,8 +61,9 @@ WHERE login='$login'"
  * @param $id - id of the message
  * @return array - data of the message
  */
-function getMessage($id): array
+function getMessage(int $id): array
 {
+    $id = mysqli_real_escape_string(connect(), $id);
     $result = mysqli_query(
         connect(),
         "SELECT title, m.date, text, CONCAT(s.name, ': ', s.email) AS sender FROM users AS u
@@ -73,19 +72,16 @@ LEFT JOIN users AS s ON s.id = sender_id
 WHERE m.id=$id"
     );
 
-    if (mysqli_num_rows($result) > 0) {
-        return $msg = mysqli_fetch_assoc($result);
-    }
-
-    return [];
+    return getResult($result);
 }
 
 /**
  * Change status on 'read' after open a message
  * @param $id - id of the message
  */
-function updateMessageStatus($id): void
+function updateMessageStatus(int $id): void
 {
+    $id = mysqli_real_escape_string(connect(), $id);
     mysqli_query(connect(), "UPDATE messages SET messages.read=true WHERE id=$id");
 }
 
@@ -94,18 +90,15 @@ function updateMessageStatus($id): void
  * @param $sender - who send the message
  * @return array - available recipients
  */
-function getRecipients($sender): array
+function getRecipients(string $sender): array
 {
+    $sender = mysqli_real_escape_string(connect(), $sender);
     $result = mysqli_query(
         connect(),
         "SELECT name, id FROM users WHERE login!='$sender' && activity=true"
     );
 
-    if (mysqli_num_rows($result) > 0) {
-        return $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }
-
-    return [];
+    return getResult($result);
 }
 
 /**
@@ -120,27 +113,72 @@ function getMessagesSections(): array
 LEFT JOIN colors AS c ON c.name=s.color"
     );
 
-    if (mysqli_num_rows($result) > 0) {
-        return $sections = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }
-    return [];
+    return getResult($result);
 }
 
 /**
  * Can the user write messages
  * @param $login - login of the user
+ * @param $showMsg - show msg if not result
  * @return bool - can write
  */
-function canWriteMsg($login): bool
+function canWriteMsg(string $login, bool $showMsg = true): bool
 {
+    $isActive = false;
+    $login = mysqli_real_escape_string(connect(), $login);
     $result = mysqli_query(
         connect(),
         "SELECT group_id FROM users
 LEFT JOIN user_group ON user_id=id && group_id=2
 WHERE login='$login'"
     );
+
     if (mysqli_num_rows($result) > 0) {
-        return (bool)mysqli_fetch_assoc($result)['activity'];
+        $isActive = (int)mysqli_fetch_assoc($result)['group_id'] === 2;
     }
-    return false;
+
+    if ($showMsg && !$isActive) {
+        include $_SERVER['DOCUMENT_ROOT'] . '/posts/templates/notActive.html';
+    }
+
+    return $isActive;
+}
+
+/**
+ * Ges user data
+ * @param $login - login of the
+ * @return array - user data
+ */
+function getUserData(string $login): array
+{
+    $login = mysqli_real_escape_string(connect(), $login);
+    $result = mysqli_query(
+        connect(),
+        "SELECT u.name AS user_name, u.email, u.activity, u.phone, u.notification, 
+       GROUP_CONCAT(g.name SEPARATOR ', ') AS group_name
+FROM users AS u
+LEFT JOIN user_group AS ug ON ug.user_id=u.id
+LEFT JOIN `groups` AS g ON g.id=ug.group_id
+WHERE u.login='$login'"
+    );
+
+    if (mysqli_num_rows($result) > 0) {
+        return mysqli_fetch_assoc($result);
+    }
+    return [];
+}
+
+/**
+ * Parse result of mysqli_query
+ * @param mysqli_result $result - result of mysqli_query
+ * @return array - array with data
+ */
+function getResult(mysqli_result $result): array
+{
+    if (mysqli_num_rows($result) === 1) {
+        return mysqli_fetch_assoc($result);
+    } elseif (mysqli_num_rows($result) > 1) {
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+    return [];
 }
